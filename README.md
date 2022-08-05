@@ -27,4 +27,5 @@
   <img src="https://user-images.githubusercontent.com/68722179/183005676-8161bc09-6f9e-4655-a8d0-75b549cf33ab.png" width="250" />
 * useQuery를 사용하면 useState와 useEffect가 필요없어진다. <br/>
   (받아온 데이터나 상태를 바로 사용 가능)
-* ✨중요!!: 버전 4부터 queryKey를 배열([ ]) 형태로 넣어줘야 한다. (error를 콘솔에 찍으면 'Missing queryFn' 나옴)
+* ✨중요!!: 버전 4부터 queryKey를 배열([ ]) 형태로 넣어줘야 한다. (이렇게 안 해주면 data를 받아오지 못함)
+* react-query는 모든 쿼리 결과에 대한 값을 default로 5분 동안 저장한다. (그동안은 refetching을 하지 않음)
