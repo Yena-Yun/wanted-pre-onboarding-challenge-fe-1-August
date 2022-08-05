@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
 import { QueryClientProvider, QueryClient } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
-import { HomePage, LoginPage, TodoListPage } from 'components';
+import { HomePage, LoginPage, TodoListPage, TodoPage } from 'components';
 
 function App() {
   const queryClient = new QueryClient();
@@ -21,12 +21,16 @@ function App() {
               <li>
                 <Link to='/todolist'>TodoList</Link>
               </li>
+              <li>
+                <Link to='/todo/0'>Todo</Link>
+              </li>
             </ul>
           </nav>
           <Routes>
             <Route path='/' element={<HomePage />} />
             <Route path='/login' element={<LoginPage />} />
             <Route path='/todolist' element={<TodoListPage />} />
+            <Route path='/todo/:todoId' element={<TodoPage />} />
           </Routes>
         </BrowserRouter>
         <ReactQueryDevtools initialIsOpen={false} />
