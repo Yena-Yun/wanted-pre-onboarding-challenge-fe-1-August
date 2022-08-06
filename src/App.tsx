@@ -13,7 +13,7 @@ function App() {
           <NavHeader />
           <Routes>
             <Route path='/' element={<Home />} />
-            <Route path='/login' element={<Login />} />
+            <Route path='/auth' element={<Login />} />
             <Route path='/todos' element={<TodoList />} />
             <Route path='/todo/:todoId' element={<Todo />} />
           </Routes>
