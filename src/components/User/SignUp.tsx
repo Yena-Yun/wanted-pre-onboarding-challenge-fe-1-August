@@ -14,15 +14,12 @@ export const SignUp = () => {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setUserInfo({ ...userInfo, [e.target.type]: e.target.value });
-
     if (userInfo.email.includes('.') && userInfo.password.length >= 7)
       setActiveBtn(true);
   };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log('submit 버튼 클릭!', userInfo);
-
     signUp(userInfo);
     navigate('/login');
   };
@@ -30,7 +27,7 @@ export const SignUp = () => {
   return (
     <>
       <h2>SignUp Page</h2>
-      <S.Form onSubmit={(e) => handleSubmit(e)}>
+      <S.Form onSubmit={handleSubmit}>
         <S.Content>
           <S.Label>
             이메일
