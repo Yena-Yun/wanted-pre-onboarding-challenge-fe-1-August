@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { signUp } from 'shared/api';
 import { UserInfoType } from 'shared/type';
-import * as S from './style';
+import * as S from './UserStyle';
 
 export const SignUp = () => {
   const navigate = useNavigate();

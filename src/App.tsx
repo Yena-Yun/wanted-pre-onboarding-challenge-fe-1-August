@@ -1,12 +1,11 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import axios from 'axios';
 import { QueryClientProvider, QueryClient } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
-import axios from 'axios';
 import { ThemeProvider } from 'styled-components';
-import { Home, Login, TodoList, Todo, NavHeader } from 'components';
+import { Home, Login, SignUp, TodoList, Todo, NavHeader } from 'components';
 import { theme } from 'styles/theme';
 import { GlobalStyle } from 'styles/global';
-import { SignUp } from 'components/User/SignUp';
 
 function App() {
   const queryClient = new QueryClient();

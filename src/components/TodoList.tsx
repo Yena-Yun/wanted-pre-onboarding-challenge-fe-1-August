@@ -1,11 +1,11 @@
 import { Link } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
-import { fetchData } from 'shared/api';
+import { getTodos } from 'shared/api';
 import { TodoType } from 'shared/type';
 import { manageStatus } from 'shared/util';
 
 export const TodoList = () => {
-  const { isLoading, data, isError, error } = useQuery(['data'], fetchData);
+  const { isLoading, data, isError, error } = useQuery(['data'], getTodos);
 
   manageStatus({ isLoading, isError }, { error });
 
