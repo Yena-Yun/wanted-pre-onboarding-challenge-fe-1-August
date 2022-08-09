@@ -1,28 +1,27 @@
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { getTodos } from 'shared/api';
 import { TodoType } from 'shared/type';
 import { manageStatus } from 'shared/util';
 
 export const TodoList = () => {
-  const { isLoading, data, isError, error } = useQuery(['data'], getTodos);
+  const navigate = useNavigate();
+  const { status, data, error } = useQuery(['data'], getTodos);
 
-  manageStatus({ isLoading, isError }, { error });
+  manageStatus({ status }, { error });
 
   return (
     <>
-      <h2>TodoListPage</h2>
-      {data?.data.map(({ id, title }: TodoType) => {
-        return (
-          <ul key={id}>
-            <li>
-              <Link to={`/todo/${id}`}>
-                <h3>{title}</h3>
-              </Link>
+      <h2>TodoList</h2>
+      <ul>
+        {data?.map(({ id, title }: TodoType) => {
+          return (
+            <li key={id} onClick={() => navigate(`/todo/${id}`)}>
+              {title}
             </li>
-          </ul>
-        );
-      })}
+          );
+        })}
+      </ul>
     </>
   );
 };

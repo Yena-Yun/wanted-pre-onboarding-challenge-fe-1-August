@@ -33,8 +33,8 @@ const headers = {
 
 export const getTodos = async () => {
   try {
-    const response = await axios.get(`${API_URL}/todos`, { headers });
-    return response;
+    const { data } = await axios.get(`${API_URL}/todos`, { headers });
+    return data;
   } catch (err) {
     console.error(err);
   }
@@ -42,8 +42,8 @@ export const getTodos = async () => {
 
 export const getTodoById = async (id: string) => {
   try {
-    const response = await axios.get(`${API_URL}/todos/${id}`, { headers });
-    return response;
+    const { data } = await axios.get(`${API_URL}/todos/${id}`, { headers });
+    return data;
   } catch (err) {
     console.error(err);
   }
@@ -51,8 +51,8 @@ export const getTodoById = async (id: string) => {
 
 export const createTodo = async (todo: TodoType) => {
   try {
-    const response = await axios.post(`${API_URL}/todos`, todo, { headers });
-    return response;
+    const { data } = await axios.post(`${API_URL}/todos`, todo, { headers });
+    return data;
   } catch (err) {
     console.error(err);
   }
@@ -60,10 +60,10 @@ export const createTodo = async (todo: TodoType) => {
 
 export const updateTodo = async (id: string, todo: TodoType) => {
   try {
-    const response = await axios.put(`${API_URL}/todos/${id}`, todo, {
+    const { data } = await axios.put(`${API_URL}/todos/${id}`, todo, {
       headers,
     });
-    return response;
+    return data;
   } catch (err) {
     console.error(err);
   }
@@ -71,8 +71,8 @@ export const updateTodo = async (id: string, todo: TodoType) => {
 
 export const deleteTodo = async (id: string) => {
   try {
-    const response = await axios.delete(`${API_URL}/todos/${id}`, { headers });
-    return response;
+    const { data } = await axios.delete(`${API_URL}/todos/${id}`, { headers });
+    return data;
   } catch (err) {
     console.error(err);
   }

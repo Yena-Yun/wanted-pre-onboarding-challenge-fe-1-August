@@ -1,6 +1,5 @@
 interface StatusType {
-  isLoading: boolean;
-  isError: boolean;
+  status: string;
 }
 
 type ErrorType<T> = {
@@ -8,12 +7,13 @@ type ErrorType<T> = {
 };
 
 export const manageStatus = (
-  { isLoading, isError }: StatusType,
+  { status }: StatusType,
   { error }: ErrorType<object>
 ) => {
-  if (isLoading) {
+  if (status === 'loading') {
     return <h2>Loading...</h2>;
-  } else if (isError) {
+  }
+  if (status === 'error') {
     return <h2>{Object(error).message}</h2>;
   }
 };

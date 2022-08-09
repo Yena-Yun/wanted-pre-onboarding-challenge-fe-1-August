@@ -1,42 +1,26 @@
 import { useParams } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
-import { fetchData } from 'shared/api';
+import { getTodoById } from 'shared/api';
 import { manageStatus } from 'shared/util';
-import { TodoType } from 'shared/type';
-
-type TodoId = {
-  todoId: string | undefined;
-};
-
-type Id = {
-  id: number;
-};
 
 export const Todo = () => {
-  const { todoId } = useParams<TodoId>();
+  const { todoId } = useParams();
 
-  const { isLoading, data, isError, error } = useQuery(['data'], fetchData);
+  const { status, data, error } = useQuery({
+    queryKey: ['data', String(todoId)],
+    queryFn: () => getTodoById(String(todoId)),
+  });
 
-  manageStatus({ isLoading, isError }, { error });
+  manageStatus({ status }, { error });
 
-  const filterData = () => {
-    return data?.data.filter(({ id }: Id) => id === parseInt(String(todoId)));
-  };
+  const { content, createdAt, updatedAt } = data;
 
   return (
     <>
-      <h2>TodoPage</h2>
-      {filterData().map(({ id, content, createdAt, updatedAt }: TodoType) => {
-        return (
-          <ul key={id}>
-            <li>
-              <p>{content}</p>
-              <p>{String(createdAt)}</p>
-              <p>{String(updatedAt)}</p>
-            </li>
-          </ul>
-        );
-      })}
+      <h2>Todo</h2>
+      <p>{content}</p>
+      <p>{createdAt}</p>
+      <p>{updatedAt}</p>
     </>
   );
 };
