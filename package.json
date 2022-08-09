@@ -30,9 +30,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "json-server": "json-server --watch db/db.json --port 4000",
-    "dev": "concurrently \"yarn start\" \"yarn run json-server\""
+    "eject": "react-scripts eject"
   },
   "eslintConfig": {
     "extends": [

@@ -1,4 +1,7 @@
-* {
+import { createGlobalStyle } from 'styled-components';
+
+export const GlobalStyle = createGlobalStyle`
+  * {
   box-sizing: border-box;
 }
 
@@ -44,8 +47,4 @@ nav ul li {
   list-style: none;
   margin-right: 16px;
 }
-
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
-}
+  `;

@@ -1,21 +1,45 @@
-import React, { useState } from 'react';
-import styled from 'styled-components';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import * as S from './style';
 
 export const Login = () => {
+  const navigate = useNavigate();
   const [emailValue, setEmailValue] = useState('');
   const [pwdValue, setPwdValue] = useState('');
   const [activeSubmitBtn, setActiveSubmitBtn] = useState(false);
+
+  const handleLogin = (emailValue = '', pwdValue = '') => {
+    const data = { emailValue, pwdValue };
+    axios
+      .post('/users/login', data)
+      .then((res) => {
+        console.log(res);
+        const { accessToken } = res.data;
+
+        if (accessToken === null) {
+          alert('가입되어 있지 않은 사용자입니다. 가입 화면으로 이동합니다.');
+          navigate('/signup');
+        }
+
+        axios.defaults.headers.common[
+          'Authorization'
+        ] = `Bearer ${accessToken}`;
+      })
+      .catch((err) => console.error(err));
+  };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     console.log('submit 버튼 클릭!');
 
-    if (!String(emailValue).includes('.'))
-      alert('이메일에 "."을 포함해주세요.');
+    if (!emailValue.includes('.')) alert('이메일에 "."을 포함해주세요.');
 
     if (emailValue === null || pwdValue === null)
       alert('이메일과 비밀번호를 모두 입력해주세요.');
     else setActiveSubmitBtn(true);
+
+    handleLogin(emailValue, pwdValue);
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>, type = '') => {
@@ -29,77 +53,37 @@ export const Login = () => {
   return (
     <>
       <h2>Login Page</h2>
-      <Form onSubmit={(e) => handleSubmit(e)}>
-        <Content>
-          <Label>
+      <S.Form onSubmit={(e) => handleSubmit(e)}>
+        <S.Content>
+          <S.Label>
             이메일
-            <Input
+            <S.Input
               type='email'
               placeholder='이메일을 입력해주세요'
               value={emailValue}
               onChange={(e) => handleChange(e, 'email')}
               autoFocus
             />
-          </Label>
-          <Label>
+          </S.Label>
+          <S.Label>
             비밀번호
-            <Input
+            <S.Input
               type='password'
               minLength={8}
               placeholder='비밀번호를 입력해주세요'
               value={pwdValue}
               onChange={(e) => handleChange(e, 'password')}
             />
-          </Label>
-        </Content>
+          </S.Label>
+        </S.Content>
         {activeSubmitBtn ? (
-          <Button active={activeSubmitBtn}>로그인</Button>
+          <S.Button active={activeSubmitBtn}>로그인</S.Button>
         ) : (
-          <Button active={activeSubmitBtn} disabled>
+          <S.Button active={activeSubmitBtn} disabled>
             로그인
-          </Button>
+          </S.Button>
         )}
-      </Form>
+      </S.Form>
     </>
   );
 };
-
-const Form = styled.form`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  margin-left: 24px;
-  padding: 24px;
-  width: 400px;
-  height: 350px;
-  border: 1px solid #8e8e8e;
-`;
-
-const Content = styled.div`
-  margin-bottom: 48px;
-`;
-
-const Label = styled.label`
-  display: flex;
-  flex-direction: column;
-
-  &:not(:last-child) {
-    margin-bottom: 36px;
-  }
-`;
-
-const Input = styled.input`
-  padding: 12px 8px;
-  border-bottom: 1px solid #8e8e8e;
-`;
-
-const Button = styled.button<{ active: boolean }>`
-  padding: 12px 20px;
-  border: 1px solid #8e8e8e;
-  border-radius: 4px;
-
-  background: ${({ active }) => (active ? 'blue' : '#8e8e8e')};
-  color: ${({ active }) => (active ? 'white' : '#eeeeee')};
-  cursor: ${({ active }) => (active ? 'pointer' : 'default')};
-`;
