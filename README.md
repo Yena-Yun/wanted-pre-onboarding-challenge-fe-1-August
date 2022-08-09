@@ -4,7 +4,6 @@
 * React
 * Typescript
 * react-query
-* json-server
 
 ## 구현기능
 1. Login / SignUp
