@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
-import { getTodos } from 'shared/api';
+import { getTodos } from 'api';
 import { TodoType } from 'shared/type';
 import { manageStatus } from 'shared/util';
 
@@ -8,7 +8,7 @@ export const TodoList = () => {
   const navigate = useNavigate();
   const { status, data, error } = useQuery(['data'], getTodos);
 
-  manageStatus({ status }, { error });
+  manageStatus({ status, error });
 
   return (
     <>

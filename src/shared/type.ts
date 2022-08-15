@@ -6,7 +6,7 @@ export interface TodoType {
   updatedAt: string;
 }
 
-export type UserInfoType = {
+export type UserInfo = {
   email: string;
   password: string;
 };

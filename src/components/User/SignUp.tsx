@@ -1,12 +1,12 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { signUp } from 'shared/api';
-import { UserInfoType } from 'shared/type';
+import { signUp } from 'api';
+import { UserInfo } from 'shared/type';
 import * as S from './UserStyle';
 
 export const SignUp = () => {
   const navigate = useNavigate();
-  const [userInfo, setUserInfo] = useState<UserInfoType>({
+  const [userInfo, setUserInfo] = useState<UserInfo>({
     email: '',
     password: '',
   });

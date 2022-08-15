@@ -1,15 +1,9 @@
-interface StatusType {
+interface Status<T> {
   status: string;
+  error: T | unknown;
 }
 
-type ErrorType<T> = {
-  error: T | unknown;
-};
-
-export const manageStatus = (
-  { status }: StatusType,
-  { error }: ErrorType<object>
-) => {
+export const manageStatus = ({ status, error }: Status<Object>) => {
   if (status === 'loading') {
     return <h2>Loading...</h2>;
   }

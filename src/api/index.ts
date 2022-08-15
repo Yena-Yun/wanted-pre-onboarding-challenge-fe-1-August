@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { TodoType, UserInfoType } from './type';
+import { TodoType, UserInfo } from 'shared/type';
 
 const API_URL = 'http://localhost:8080';
 
@@ -7,7 +7,7 @@ export const fetchData = () => {
   return axios.get(`${API_URL}/data`);
 };
 
-export const login = async (userInfo: UserInfoType) => {
+export const login = async (userInfo: UserInfo) => {
   try {
     const response = await axios.post(`${API_URL}/users/login`, userInfo);
     return response;
@@ -16,7 +16,7 @@ export const login = async (userInfo: UserInfoType) => {
   }
 };
 
-export const signUp = async (userInfo: UserInfoType) => {
+export const signUp = async (userInfo: UserInfo) => {
   try {
     const response = await axios.post(`${API_URL}/users/create`, userInfo);
     console.log(response);
@@ -58,9 +58,9 @@ export const createTodo = async (todo: TodoType) => {
   }
 };
 
-export const updateTodo = async (id: string, todo: TodoType) => {
+export const updateTodo = async (todo: TodoType) => {
   try {
-    const { data } = await axios.put(`${API_URL}/todos/${id}`, todo, {
+    const { data } = await axios.put(`${API_URL}/todos/${todo.id}`, todo, {
       headers,
     });
     return data;
