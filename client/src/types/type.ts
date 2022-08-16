@@ -1,7 +1,7 @@
-export interface TodoType {
-  id: number;
+export interface Todo {
+  id: string;
   title: string;
-  content: string | string[];
+  content: string;
   createdAt: string;
   updatedAt: string;
 }

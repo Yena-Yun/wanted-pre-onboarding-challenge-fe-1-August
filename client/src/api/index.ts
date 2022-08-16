@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { TodoType, UserInfo } from 'shared/type';
+import { UserInfo, Todo } from 'types/type';
 
 const API_URL = 'http://localhost:8080';
 
@@ -49,7 +49,7 @@ export const getTodoById = async (id: string) => {
   }
 };
 
-export const createTodo = async (todo: TodoType) => {
+export const createTodo = async (todo: Todo) => {
   try {
     const { data } = await axios.post(`${API_URL}/todos`, todo, { headers });
     return data;
@@ -58,7 +58,7 @@ export const createTodo = async (todo: TodoType) => {
   }
 };
 
-export const updateTodo = async (todo: TodoType) => {
+export const updateTodo = async (todo: Todo) => {
   try {
     const { data } = await axios.put(`${API_URL}/todos/${todo.id}`, todo, {
       headers,
