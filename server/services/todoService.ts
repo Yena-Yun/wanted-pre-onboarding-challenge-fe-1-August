@@ -3,14 +3,14 @@ import type { Todo, TodoInput } from 'types/todos';
 
 export const createTodo = async ({ title, content }: TodoInput) => {
   // 새로운 todo 생성
-  const todo = create<Todo>({ title, content });
+  const newTodo = create<Todo>({ title, content });
 
   // db에 저장(기록)
-  db.data?.todos.push(todo);
+  db.data?.todos.push(newTodo);
   await db.write();
 
-  // 새로이 추가된 todo 반환
-  return todo;
+  // 새로운 todo 반환
+  return newTodo;
 };
 
 export const findTodos = () => {
