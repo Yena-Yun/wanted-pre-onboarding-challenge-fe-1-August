@@ -1,5 +1,5 @@
 import { createConnection } from 'models/db';
-import app from './app';
+import { app } from './app';
 
 createConnection();
 

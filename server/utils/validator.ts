@@ -1,27 +1,22 @@
 import validator from 'validator';
+import { UserInput } from 'types/users';
 
-export const loginValidator = (loginForm: {
-  email: string;
-  password: string;
-}) => {
-  if (
-    validator.isEmpty(loginForm.email) ||
-    validator.isEmpty(loginForm.password)
-  ) {
+export const userValidator = ({ email, password }: UserInput) => {
+  if (validator.isEmpty(email) || validator.isEmpty(password)) {
     return {
       isValid: false,
       message: USER_VALIDATION.EMPTY_INPUT,
     };
   }
 
-  if (!validator.isEmail(loginForm.email)) {
+  if (!validator.isEmail(email)) {
     return {
       isValid: false,
       message: USER_VALIDATION.INVALID_EMAIL,
     };
   }
 
-  if (!validator.isLength(loginForm.password, { min: 8 })) {
+  if (!validator.isLength(password, { min: 8 })) {
     return {
       isValid: false,
       message: USER_VALIDATION.INVALID_PASSWORD,

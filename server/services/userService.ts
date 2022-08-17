@@ -13,6 +13,6 @@ export const createUser = async ({ email, password }: UserInput) => {
   return newUser;
 };
 
-export const findTodo = (predicate: (user: User) => boolean) => {
+export const findUser = (predicate: (user: User) => boolean) => {
   return db.data?.users.find(predicate);
 };

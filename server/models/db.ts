@@ -37,11 +37,15 @@ export const createConnection = async () => {
 
   const adapter = new JSONFile<Data>(filePath);
   db = new Low<Data>(adapter);
-  await db.read(); // JSON 파일에서 data를 읽어냄 = db.data가 됨
 
-  // json 파일이 없을 경우 db.data가 null이 됨 => default 값을 설정해준다. (||= 은 or= (+=, -=과 비슷))
+  // db를 읽어냄 => db.data가 됨
+  await db.read();
+
+  // 파일이 없을 경우 db.data가 null이 되는 경우를 대비해서 default 값을 설정 (||= 은 +=, -=과 비슷)
   db.data ||= { todos: [], users: [] };
-  await db.write(); // db.data를 읽어서 db.json에 저장(기록)
+
+  // db.data를 db에 저장(기록)
+  await db.write();
 };
 
 export const getConnection = () => db;

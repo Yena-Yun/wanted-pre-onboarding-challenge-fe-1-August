@@ -3,9 +3,11 @@ import bodyParser from 'body-parser';
 import cors from 'cors';
 import createError from 'http-errors';
 import { StatusCodes } from 'http-status-codes';
+import { router as todoRouter } from 'routes/todoRouter';
+import { router as userRouter } from 'routes/userRouter';
 import type { Request, Response, NextFunction } from 'express';
 
-const app = express();
+export const app = express();
 
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -13,8 +15,8 @@ app.use(bodyParser.json());
 
 app.use(cors());
 
-// app.use('/todos', todoRouter);
-// app.use('/users', userRouter);
+app.use('/todos', todoRouter);
+app.use('/users', userRouter);
 
 app.use((req, res, next) => {
   next(createError(404));
@@ -30,5 +32,3 @@ app.use(
     return res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(err);
   }
 );
-
-export default app;
